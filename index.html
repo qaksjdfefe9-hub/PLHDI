@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title> منصة التفوقQM</title>
-  <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;600;700;800&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Almarai:wght=300;400;600;700;800&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.plyr.io/3.7.2/plyr.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/es6-promise/4.2.8/es6-promise.auto.min.js"></script>
@@ -292,6 +292,7 @@
     </div>
   </div>
 
+  <script src="https://cdn.plyr.io/3.7.2/plyr.js"></script>
   <script>
     // متغيرات عامة
     let allCodes = {};
@@ -307,9 +308,8 @@
     // 5 دقائق = 300,000 ملي ثانية
     const fiveMinutesInMs = 300000; 
     
-    // دالة التحقق من إلغاء الصلاحية (كل 5 دقائق)
+    // دالة التحقق من إلغاء الصلاحية (كل 5 دقائق) - لإجراء عملية الطرد
     function checkRevocationStatus() {
-        // نستخدم الكود المخزن في المتصفح للتحقق
         const userCode = localStorage.getItem('userAccessCode'); 
         
         // إذا لم يكن هناك كود مخزن أو لا يوجد دليل وصول، توقف.
@@ -320,13 +320,17 @@
         // إعادة جلب أحدث نسخة من ملف codes.json
         fetch(CODES_FILE_URL)
             .then(response => {
+                // منع التخزين المؤقت (Cache) لضمان جلب أحدث نسخة
+                if (response.headers.get('Cache-Control')?.includes('no-cache')) {
+                    // Netlify قد لا يدعم هذا بشكل افتراضي، لكن المحاولة جيدة
+                }
                 if (!response.ok) throw new Error('Codes file not found');
                 return response.json();
             })
             .then(codesFromServer => {
                 const codeStatus = codesFromServer[userCode];
 
-                // التحقق: إذا كان الكود غير موجود أو حالته "used": true، هذا يعني أنك ألغيته يدوياً في GitHub
+                // التحقق: إذا كان الكود غير موجود أو حالته "used": true (تم الإلغاء)
                 if (!codeStatus || codeStatus.used === true) {
                     
                     // **تنفيذ عملية الطرد (Log Out)**
@@ -334,8 +338,7 @@
                     localStorage.removeItem('userAccessCode');     
                     
                     alert('تم إلغاء صلاحية الوصول لهذا الرمز من قبل الإدارة.');
-                    // إعادة تحميل الصفحة لإظهار شاشة طلب الكود مجدداً
-                    window.location.reload(); 
+                    window.location.reload(); // لإظهار شاشة طلب الكود
                 }
             })
             .catch(error => {
@@ -351,7 +354,7 @@
         setInterval(checkRevocationStatus, fiveMinutesInMs);
     }
     
-    // دالة تهيئة التطبيق المعدلة (التي تستبدل جزء من DOMContentLoaded)
+    // دالة تهيئة التطبيق المعدلة
     function checkAccessAndInitialize() {
         const accessGranted = localStorage.getItem('accessGranted');
 
@@ -426,7 +429,6 @@
             })
             .catch(error => {
                 console.error(error);
-                // يمكنك إضافة رسالة خطأ هنا لعرضها للمستخدم
             });
     }
 
@@ -437,7 +439,7 @@
         fetchAppData();
     }
 
-    // دالة التحقق من الكود (معدلة لإضافة حفظ الوصول)
+    // دالة التحقق من الكود (تم تعديلها لحفظ دليل الوصول)
     window.checkAccessCode = function() {
         const enteredCode = document.getElementById('accessCode').value.trim().toUpperCase();
         errorElement.style.display = 'none';
@@ -456,16 +458,16 @@
                 errorElement.style.display = 'block';
             } else {
                 // /////////////////////////////////////////////////////////
-                // 🟢 تعديل هنا: حفظ دليل الوصول والبدء بالتحقق الدوري
+                // 🟢 التعديل: حفظ دليل الوصول والبدء بالتحقق الدوري
                 // /////////////////////////////////////////////////////////
                 localStorage.setItem('userAccessCode', enteredCode); 
-                localStorage.setItem('accessGranted', 'true'); // NEW LINE
+                localStorage.setItem('accessGranted', 'true'); // حفظ الوصول
                 
                 loginSuccess();
-                startPeriodicCheck(); // NEW LINE
-
+                startPeriodicCheck(); // بدء التحقق كل 5 دقائق
+                
                 // رسالة للمطور عن الإجراء اليدوي اللازم
-                console.warn(`تم تفعيل الكود: ${enteredCode}. يرجى تحديث ملف codes.json وجعل "used": true لهذا الكود.`);
+                console.warn(`تم تفعيل الكود: ${enteredCode}. يرجى تحديث ملف codes.json وجعل "used": true لهذا الكود يدوياً في GitHub.`);
                 alert(`تم تفعيل الكود بنجاح. تواصل مع المدرس لتأكيد التفعيل النهائي للكود.`);
             }
         } else {
@@ -482,10 +484,9 @@
     // *** منطق تهيئة التطبيق المعدل ***
     document.addEventListener('DOMContentLoaded', () => {
       initializeTheme();
-      // إخفاء المحتوى وشاشة الدخول مؤقتاً
       document.getElementById('loginModal').style.display = 'none';
       document.getElementById('appContent').style.display = 'none';
-      document.body.style.overflow = 'auto'; // السماح بالتمرير
+      document.body.style.overflow = 'auto'; 
       
       // 🛑 تعديل هنا: التحقق من وجود وصول محفوظ قبل تحميل الأكواد وعرض شاشة الدخول
       checkAccessAndInitialize(); 
