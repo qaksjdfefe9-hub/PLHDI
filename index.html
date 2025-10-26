@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title> منصة التفوقQM</title>
-  <link href="https://fonts.googleapis.com/css2?family=Almarai:wght=300;400;600;700;800&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;600;700;800&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.plyr.io/3.7.2/plyr.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/es6-promise/4.2.8/es6-promise.auto.min.js"></script>
@@ -18,1530 +18,453 @@
       --accent: #4caf50;
       --warning: #ff9800;
       --error: #f44336;
-      --success: #8bc34a;
-
-      --plyr-color-main: #ff6f00;
-      --bg-color: #0a0a0a;
-      --bg-secondary: #121212;
-      --text-color: #ffffff;
-      --text-secondary: #b0b0b0;
-      --card-color: #1e1e1e;
-      --card-hover: #2a2a2a;
-      --border-color: #333333;
-      --shadow: 0 4px 20px rgba(0,0,0,0.3);
-      --shadow-hover: 0 8px 30px rgba(255,111,0,0.2);
-
-      --gradient-primary: linear-gradient(135deg, #ff6f00 0%, #ff8f00 100%);
-      --gradient-card: linear-gradient(145deg, #1e1e1e 0%, #2a2a2a 100%);
-      --gradient-bg: linear-gradient(180deg, #0a0a0a 0%, #121212 100%);
+      --info: #03a9f4;
+      --text: #333333;
+      --text-light: #ffffff;
+      --bg: #f4f4f4;
+      --bg-dark: #cccccc;
+      --bg-light: #ffffff;
     }
 
-    [data-theme="light"] {
+    body.dark-mode {
       --primary: #ff6f00;
       --primary-dark: #e65100;
       --primary-light: #ff8f00;
-      --bg-color: #f8f9fa;
-      --bg-secondary: #ffffff;
-      --text-color: #212529;
-      --text-secondary: #6c757d;
-      --card-color: #ffffff;
-      --card-hover: #f8f9fa;
-      --border-color: #e9ecef;
-      --shadow: 0 4px 20px rgba(0,0,0,0.1);
-      --shadow-hover: 0 8px 30px rgba(255,111,0,0.15);
-
-      --gradient-card: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
-      --gradient-bg: linear-gradient(180deg, #f8f9fa 0%, #ffffff 100%);
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: 'Almarai', sans-serif;
+      --secondary: #2196f3;
+      --accent: #4caf50;
+      --warning: #ff9800;
+      --error: #f44336;
+      --info: #03a9f4;
+      --text: #cccccc;
+      --text-light: #f4f4f4;
+      --bg: #1e1e1e;
+      --bg-dark: #000000;
+      --bg-light: #2c2c2c;
     }
 
     body {
-      background: var(--gradient-bg);
-      color: var(--text-color);
-      line-height: 1.6;
-      overflow-x: hidden;
-      min-height: 100vh;
+      font-family: 'Almarai', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      transition: background-color 0.3s, color 0.3s;
+      margin: 0;
+      padding: 0;
     }
 
-    /* Scrollbar styling */
-    ::-webkit-scrollbar {
-      width: 8px;
-      height: 8px;
-    }
-
-    ::-webkit-scrollbar-track {
-      background: var(--bg-secondary);
-    }
-
-    ::-webkit-scrollbar-thumb {
-      background: var(--primary);
-      border-radius: 4px;
-    }
-
-    ::-webkit-scrollbar-thumb:hover {
-      background: var(--primary-dark);
-    }
-
-    /* Page transitions */
-    .page {
-      display: none;
-      padding: 2rem;
-      max-width: 1400px;
-      margin: 0 auto;
-      animation: fadeInUp 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    }
-
-    .page.active {
-      display: block;
-    }
-
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @keyframes pulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.05); }
-      100% { transform: scale(1); }
-    }
-
-    @keyframes shimmer {
-      0% { background-position: -200px 0; }
-      100% { background-position: calc(200px + 100%) 0; }
-    }
-
-    /* Header styles */
-    header {
-      background: var(--gradient-card);
-      backdrop-filter: blur(20px);
-      padding: 1.5rem 2rem;
+    .modal {
       display: flex;
+      justify-content: center;
       align-items: center;
-      gap: 2rem;
-      position: sticky;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
       top: 0;
-      z-index: 100;
-      box-shadow: var(--shadow);
-      border-bottom: 1px solid var(--border-color);
-      flex-wrap: wrap;
-    }
-
-    .site-title {
-      color: var(--primary);
-      font-size: 2rem;
-      font-weight: 800;
-      cursor: pointer;
-      transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-      text-shadow: 0 2px 4px rgba(255,111,0,0.3);
-      position: relative;
-    }
-
-    .site-title:hover {
-      transform: scale(1.05);
-      animation: pulse 2s infinite;
-    }
-
-    .site-title::before {
-      content: '';
-      position: absolute;
-      top: -5px;
-      left: -5px;
-      right: -5px;
-      bottom: -5px;
-      background: var(--gradient-primary);
-      border-radius: 8px;
-      opacity: 0;
-      z-index: -1;
-      transition: opacity 0.3s;
-    }
-
-    .site-title:hover::before {
-      opacity: 0.1;
-    }
-
-    .nav-buttons {
-      display: flex;
-      gap: 1rem;
-      margin: 0 1rem;
-      background: var(--bg-secondary);
-      padding: 0.5rem;
-      border-radius: 12px;
-      box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
-    }
-
-    .nav-btn {
-      background: transparent;
-      color: var(--text-secondary);
-      border: none;
-      border-radius: 8px;
-      padding: 0.8rem 1.5rem;
-      cursor: pointer;
-      transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-      font-weight: 600;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .nav-btn::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
       width: 100%;
       height: 100%;
-      background: var(--gradient-primary);
-      transition: left 0.3s;
-      z-index: -1;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.9);
+      padding-top: 50px;
     }
 
-    .nav-btn:hover {
-      color: white;
-      transform: translateY(-2px);
-    }
-
-    .nav-btn:hover::before {
-      left: 0;
-    }
-
-    .nav-btn.active {
-      background: var(--gradient-primary);
-      color: white;
-      box-shadow: var(--shadow-hover);
-    }
-
-    .search-container {
-      flex-grow: 1;
-      max-width: 600px;
-      display: flex;
-      gap: 1rem;
-      position: relative;
-    }
-
-    #searchInput {
-      width: 100%;
-      padding: 1rem 1.5rem;
-      border: 2px solid var(--border-color);
-      border-radius: 25px;
-      background: var(--card-color);
-      color: var(--text-color);
-      font-size: 1rem;
-      transition: all 0.3s;
-      box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
-    }
-
-    #searchInput:focus {
-      outline: none;
-      border-color: var(--primary);
-      box-shadow: 0 0 0 3px rgba(255,111,0,0.1);
-      transform: translateY(-2px);
-    }
-
-    #searchButton, #themeToggle {
-      background: var(--gradient-primary);
-      color: white;
-      border: none;
-      border-radius: 12px;
-      cursor: pointer;
-      transition: all 0.3s;
-      font-weight: 600;
-      box-shadow: var(--shadow);
-      position: relative;
-      overflow: hidden;
-    }
-
-    #searchButton {
-      padding: 1rem 2rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    #themeToggle {
-      padding: 1rem;
-      width: 50px;
-      height: 50px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    #searchButton:hover, #themeToggle:hover {
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-hover);
-    }
-
-    /* Teachers grid */
-    .teachers-section {
-      margin-top: 2rem;
-    }
-
-    .section-title {
-      font-size: 2.5rem;
-      font-weight: 700;
+    .modal-content {
+      background-color: var(--bg-light);
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      max-width: 90%;
+      width: 350px;
       text-align: center;
-      margin-bottom: 3rem;
-      background: var(--gradient-primary);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
     }
 
-    .teachers-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 2rem;
-      padding: 1rem 0;
+    .modal-content input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid var(--bg-dark);
+      border-radius: 5px;
+      box-sizing: border-box;
+      background-color: var(--bg);
+      color: var(--text);
+    }
+
+    .modal-content button {
+      width: 100%;
+      padding: 12px;
+      background-color: var(--primary);
+      color: var(--text-light);
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background-color 0.3s;
+    }
+
+    .modal-content button:hover {
+      background-color: var(--primary-dark);
+    }
+
+    .error-message {
+      color: var(--error);
+      margin-top: 15px;
+      font-weight: bold;
+      display: none;
+    }
+
+    .header {
+      background-color: var(--bg-light);
+      color: var(--text);
+      padding: 15px 20px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 500;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .theme-toggle {
+      background: none;
+      border: none;
+      color: var(--text);
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: color 0.3s;
+    }
+
+    .theme-toggle:hover {
+      color: var(--primary);
     }
 
     .teacher-card {
-      background: var(--gradient-card);
-      padding: 2rem;
-      border-radius: 20px;
-      cursor: pointer;
-      transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-      border: 1px solid var(--border-color);
-      position: relative;
-      overflow: hidden;
-      /* تنسيق توسيط الصورة فقط */
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      min-height: 250px;
-    }
-
-    .teacher-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 4px;
-      background: var(--gradient-primary);
-      transform: scaleX(0);
+      background-color: var(--bg-light);
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      margin: 20px;
+      padding: 20px;
+      text-align: center;
       transition: transform 0.3s;
     }
 
     .teacher-card:hover {
-      transform: translateY(-10px) scale(1.02);
-      box-shadow: var(--shadow-hover);
-    }
-
-    .teacher-card:hover::before {
-      transform: scaleX(1);
-    }
-
-    .teacher-img {
-      width: 180px;
-      height: 180px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 4px solid var(--primary);
-      display: block;
-      margin: 0 auto; /* تم تعديل الهامش لإزالة الهامش السفلي */
-      transition: all 0.3s;
-      box-shadow: 0 8px 20px rgba(255,111,0,0.3);
-    }
-
-    .teacher-card:hover .teacher-img {
-      transform: scale(1.1);
-      border-color: var(--primary-light);
-    }
-
-    /* إخفاء الاسم والموضوع - التعديل المطلوب */
-    .teacher-card .teacher-name,
-    .teacher-card .teacher-subject {
-      display: none !important;
-    }
-    
-    .teacher-name {
-      font-size: 1.4rem;
-      font-weight: 700;
-      text-align: center;
-      margin-bottom: 0.5rem;
-      color: var(--text-color);
-    }
-
-    .teacher-subject {
-      text-align: center;
-      color: var(--text-secondary);
-      font-size: 1.1rem;
-    }
-
-    /* Classes page */
-    .classes-page {
-      display: grid;
-      gap: 2rem;
-    }
-
-    .teacher-info {
-      background: var(--gradient-card);
-      padding: 2rem;
-      border-radius: 20px;
-      display: flex;
-      align-items: center;
-      gap: 2rem;
-      box-shadow: var(--shadow);
-      border: 1px solid var(--border-color);
-    }
-
-    .teacher-img-lg {
-      width: 150px;
-      height: 150px;
-      border-radius: 50%;
-      border: 4px solid var(--primary);
-      object-fit: cover;
-      box-shadow: 0 8px 20px rgba(255,111,0,0.3);
-    }
-
-    .teacher-details h2 {
-      font-size: 2rem;
-      margin-bottom: 0.5rem;
-    }
-
-    .teacher-details p {
-      font-size: 1.2rem;
-      color: var(--text-secondary);
-    }
-
-    .back-button, .copy-button {
-      background: var(--gradient-primary);
-      color: white;
-      border: none;
-      padding: 1rem 2rem;
-      border-radius: 12px;
-      cursor: pointer;
-      transition: all 0.3s;
-      font-weight: 600;
-      margin-bottom: 1rem;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      box-shadow: var(--shadow);
-    }
-
-    .back-button:hover, .copy-button:hover {
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-hover);
-    }
-
-    .classes-list {
-      display: grid;
-      gap: 2rem;
-    }
-
-    .class-card {
-      background: var(--gradient-card);
-      border-radius: 15px;
-      overflow: hidden;
-      box-shadow: var(--shadow);
-      border: 1px solid var(--border-color);
-      transition: all 0.3s;
-    }
-
-    .class-card:hover {
       transform: translateY(-5px);
-      box-shadow: var(--shadow-hover);
     }
 
-    .class-header {
+    .teacher-image {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--primary);
+      margin-bottom: 10px;
+    }
+
+    .lectures-container {
+      margin-top: 20px;
+    }
+
+    .unit {
+      background-color: var(--bg);
+      border-radius: 6px;
+      margin-bottom: 15px;
+      overflow: hidden;
+      border: 1px solid var(--bg-dark);
+    }
+
+    .unit-header {
+      padding: 15px;
+      background-color: var(--secondary);
+      color: var(--text-light);
+      cursor: pointer;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 1.5rem 2rem;
-      border-right: 4px solid var(--primary);
-      cursor: pointer;
-      transition: all 0.3s;
-      position: relative;
+      font-weight: bold;
     }
 
-    .class-header:hover {
-      background: var(--card-hover);
+    .unit-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-in-out;
+      background-color: var(--bg-light);
     }
 
-    .class-header h3 {
-      font-size: 1.3rem;
-      font-weight: 600;
+    .unit-content.active {
+      max-height: 1000px; /* قيمة كبيرة بما يكفي لاستيعاب المحتوى */
     }
 
-    .class-header span {
-      font-size: 1.2rem;
-      transition: transform 0.3s;
-    }
-
-    .lectures-list {
-      display: none;
-      gap: 1rem;
-      padding: 0 2rem 2rem;
-    }
-
-    .lecture-item {
-      position: relative;
-      padding: 1.2rem 1.5rem 1.2rem 3rem;
-      background: var(--bg-secondary);
-      border-radius: 12px;
-      border-right: 3px solid var(--primary);
-      cursor: pointer;
-      transition: all 0.3s;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .lecture-item:hover {
-      background: var(--card-hover);
-      transform: translateX(10px);
-      box-shadow: var(--shadow);
-    }
-
-    .lecture-content {
-      flex-grow: 1;
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-    }
-
-    .lecture-checkbox {
-      width: 20px;
-      height: 20px;
-      border: 2px solid var(--primary);
-      border-radius: 4px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.3s;
-      background: transparent;
-      flex-shrink: 0;
-    }
-
-    .lecture-checkbox.completed {
-      background: var(--primary);
-      color: white;
-    }
-
-    .lecture-checkbox:hover {
-      transform: scale(1.1);
-      box-shadow: 0 0 10px rgba(255,111,0,0.3);
+    .lecture {
+      padding: 15px;
+      border-bottom: 1px solid var(--bg-dark);
+      text-align: right;
     }
 
     .lecture-title {
-      flex-grow: 1;
+      font-weight: bold;
+      color: var(--primary-dark);
     }
 
-    .lecture-progress {
-      font-size: 0.9rem;
-      color: var(--text-secondary);
-      margin-right: 1rem;
-    }
-
-    /* Video page */
-    .video-page {
-      display: flex;
-      flex-direction: column;
-      gap: 2rem;
-    }
-
-    .video-container {
-      position: relative;
-      background: black;
-      border-radius: 15px;
-      overflow: hidden;
-      box-shadow: var(--shadow-hover);
-    }
-
-    .plyr video {
+    .player-container {
+      margin-top: 10px;
       width: 100%;
-      height: auto;
     }
 
-    .video-details {
-      background: var(--gradient-card);
-      padding: 2rem;
-      border-radius: 15px;
-      text-align: center;
-      box-shadow: var(--shadow);
-      border: 1px solid var(--border-color);
+    @media (min-width: 768px) {
+      .content-grid {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        gap: 20px;
+        padding: 20px;
+      }
+
+      .announcements {
+        grid-column: 1 / 2;
+      }
+
+      .teachers {
+        grid-column: 2 / 3;
+      }
     }
 
-    .video-details h2 {
-      font-size: 1.8rem;
-      margin-bottom: 1rem;
+    .announcement-card {
+      background-color: var(--bg-light);
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+      margin-bottom: 15px;
+      border-left: 5px solid var(--accent);
     }
 
-    .video-details p {
-      color: var(--text-secondary);
-      font-size: 1.1rem;
-      margin-bottom: 2rem;
-    }
-
-    /* Materials and Exams */
-    .materials-grid, .exams-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-      gap: 2rem;
-      padding: 2rem 0;
-    }
-
-    .material-card, .exam-card {
-      background: var(--gradient-card);
-      padding: 2rem;
-      border-radius: 20px;
-      transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-      border: 1px solid var(--border-color);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .material-card::before, .exam-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 4px;
-      background: var(--gradient-primary);
-      transform: scaleX(0);
-      transition: transform 0.3s;
-    }
-
-    .material-card:hover, .exam-card:hover {
-      transform: translateY(-10px);
-      box-shadow: var(--shadow-hover);
-    }
-
-    .material-card:hover::before, .exam-card:hover::before {
-      transform: scaleX(1);
-    }
-
-    .material-img, .exam-img {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-      border-radius: 12px;
-      margin-bottom: 1.5rem;
-      transition: transform 0.3s;
-    }
-
-    .material-card:hover .material-img, .exam-card:hover .exam-img {
-      transform: scale(1.05);
-    }
-
-    .material-title, .exam-title {
-      font-size: 1.3rem;
-      font-weight: 600;
-      margin-bottom: 0.8rem;
-    }
-
-    .material-subject, .exam-subject {
+    .announcement-card h4 {
+      margin-top: 0;
       color: var(--primary);
-      margin-bottom: 1rem;
-      font-weight: 600;
-    }
-
-    .download-btn {
-      display: block;
-      width: 100%;
-      background: var(--gradient-primary);
-      color: white;
-      text-align: center;
-      padding: 1rem;
-      border-radius: 12px;
-      text-decoration: none;
-      transition: all 0.3s;
-      font-weight: 600;
-      box-shadow: var(--shadow);
-    }
-
-    .download-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-hover);
-    }
-
-    /* Modal */
-    .modal {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.9);
-      backdrop-filter: blur(10px);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 200;
-      animation: fadeIn 0.3s;
-    }
-
-    .modal-content {
-      background: var(--gradient-card);
-      padding: 2rem;
-      border-radius: 20px;
-      text-align: center;
-      position: relative;
-      max-width: 500px;
-      width: 90%;
-      box-shadow: var(--shadow-hover);
-      animation: slideUp 0.3s;
-    }
-
-    @keyframes slideUp {
-      from {
-        transform: translateY(50px);
-        opacity: 0;
-      }
-      to {
-        transform: translateY(0);
-        opacity: 1;
-      }
-    }
-
-    .modal-content img {
-      width: 150px;
-      height: 150px;
-      border-radius: 50%;
-      margin-bottom: 1rem;
-      border: 3px solid var(--primary);
-    }
-
-    .modal-content a {
-      display: inline-block;
-      background: var(--gradient-primary);
-      color: white;
-      padding: 1rem 2rem;
-      border-radius: 12px;
-      text-decoration: none;
-      margin: 1rem 0.5rem;
-      transition: all 0.3s;
-      font-weight: 600;
-    }
-
-    .modal-content a:hover {
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-hover);
-    }
-
-    .close-modal {
-      position: absolute;
-      top: 1rem;
-      left: 1rem;
-      background: transparent;
-      border: none;
-      font-size: 1.5rem;
-      cursor: pointer;
-      color: var(--text-color);
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.3s;
-    }
-
-    .close-modal:hover {
-      background: var(--error);
-      color: white;
-    }
-
-    /* Loading states */
-    .loading {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 3rem;
-    }
-
-    .spinner {
-      width: 50px;
-      height: 50px;
-      border: 4px solid var(--border-color);
-      border-top: 4px solid var(--primary);
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
-    }
-
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-
-    /* Responsive design */
-    @media (max-width: 768px) {
-      header {
-        flex-direction: column;
-        padding: 1rem;
-        gap: 1rem;
-      }
-
-      .site-title {
-        font-size: 1.5rem;
-      }
-
-      .nav-buttons {
-        width: 100%;
-        justify-content: center;
-        margin: 0;
-      }
-
-      .nav-btn {
-        padding: 0.6rem 1rem;
-        font-size: 0.9rem;
-      }
-
-      .search-container {
-        width: 100%;
-      }
-
-      .teachers-grid, .materials-grid, .exams-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .teacher-info {
-        flex-direction: column;
-        text-align: center;
-      }
-
-      .teacher-img, .teacher-img-lg {
-        width: 120px;
-        height: 120px;
-      }
-
-      .page {
-        padding: 1rem;
-      }
-
-      .section-title {
-        font-size: 2rem;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .site-title {
-        font-size: 1.2rem;
-      }
-
-      .nav-btn {
-        padding: 0.5rem 0.8rem;
-        font-size: 0.8rem;
-      }
-
-      #searchInput {
-        padding: 0.8rem 1rem;
-      }
-
-      .teacher-card, .material-card, .exam-card {
-        padding: 1.5rem;
-      }
-
-      .section-title {
-        font-size: 1.5rem;
-      }
     }
   </style>
  </head>
- <body> 
-  
-  <div id="loginModal" class="modal" style="display: none;"> <div class="modal-content" style="max-width: 500px;">
-          <i class="fas fa-lock" style="font-size: 3rem; color: var(--primary); margin-bottom: 1rem;"></i>
-          <h3>مرحباً بك في منصة التفوقQM</h3>
-          <p>الرجاء إدخال كود الدخول الخاص بك للمتابعة:</p>
-          <input type="password" id="accessCodeInput" placeholder="أدخل كود الدخول هنا" style="width: 100%; padding: 1rem; margin: 1rem 0; border-radius: 8px; border: 1px solid var(--border-color); background: var(--bg-secondary); color: var(--text-color); font-size: 1.1rem; text-align: center;" onkeydown="if(event.key === 'Enter') checkAccessCode()">
-          <button id="accessButton" class="download-btn" onclick="checkAccessCode()"><i class="fas fa-sign-in-alt"></i> الدخول للمنصة</button>
-          <p id="accessError" style="color: var(--error); margin-top: 1rem; display: none; font-weight: bold;">كود الدخول غير صحيح. حاول مرة أخرى.</p>
-      </div>
+ <body>
+
+  <div id="loginModal" class="modal">
+    <div class="modal-content">
+      <h2>مرحباً بك في منصة التفوقQM</h2>
+      <p>يرجى إدخال رمز الدخول الخاص بك للمتابعة:</p>
+      <input type="text" id="accessCode" placeholder="أدخل كود الدخول هنا">
+      <button onclick="checkAccessCode()">دخول</button>
+      <p id="loginError" class="error-message"></p>
+    </div>
   </div>
+
   <div id="appContent" style="display: none;">
-    <header>
-     <h1 class="site-title" onclick="navigate('home')"><i class="fas fa-graduation-cap"></i> منصة التفوقQM</h1>
-     <div class="nav-buttons">
-      <button class="nav-btn active" onclick="loadContent('lectures')"><i class="fas fa-play-circle"></i> المحاضرات</button>
-      <button class="nav-btn" onclick="loadContent('materials')"><i class="fas fa-book"></i> الملازم</button>
-      <button class="nav-btn" onclick="loadContent('exams')"><i class="fas fa-clipboard-check"></i> الامتحانات</button>
-     </div>
-     <div class="search-container">
-      <input type="text" id="searchInput" placeholder="ابحث عن مدرس أو مادة...">
-      <button id="searchButton"><i class="fas fa-search"></i> بحث</button>
-     </div>
-     <button id="themeToggle"><i class="fas fa-moon"></i></button>
+    <header class="header">
+      <div class="logo">منصة التفوقQM</div>
+      <button class="theme-toggle" onclick="toggleTheme()"><i class="fas fa-moon" id="themeIcon"></i></button>
     </header>
-    <div id="homePage" class="page"> <div class="teachers-section">
-      <h2 class="section-title">اختر مدرسك المفضل</h2>
-      <div class="teachers-grid" id="teachersGrid">
-       <div class="loading">
-        <div class="spinner"></div>
-       </div>
+
+    <div class="content-grid">
+
+      <div>
+        <section class="announcements">
+          <h3>الإعلانات</h3>
+          <div id="announcements-list">
+            <p>جارٍ تحميل الإعلانات...</p>
+          </div>
+        </section>
+
+        <section class="materials">
+          <h3>مواد إضافية</h3>
+          <div id="materials-list">
+            <p>لا توجد مواد إضافية حالياً.</p>
+          </div>
+        </section>
       </div>
-     </div>
-    </div>
-    <div id="classesPage" class="page">
-     <div class="classes-page">
-      <button class="back-button" onclick="navigate('home')"><i class="fas fa-arrow-right"></i> الرجوع للمدرسين</button>
-      <div class="teacher-info">
-       <img id="teacherImage" class="teacher-img-lg" alt="صورة المدرس">
-       <div class="teacher-details">
-        <h2 id="teacherName"></h2>
-        <p id="teacherSubject"></p>
-       </div>
-      </div>
-      <div class="classes-list" id="classesList"></div>
-     </div>
-    </div>
-    <div id="videoPage" class="page">
-     <div class="video-page">
-      <div class="video-container">
-       <video id="player" playsinline controls></video>
-      </div>
-      <div class="video-details">
-       <h2 id="videoTitle"></h2>
-       <p id="videoDescription"></p>
-       <button class="copy-button" onclick="copyLectureLink()"><i class="fas fa-copy"></i></button>
-       <button class="back-button" onclick="navigate('classes')"><i class="fas fa-arrow-right"></i> العودة للفصول</button>
-      </div>
-     </div>
-    </div>
-    <div id="materialsPage" class="page">
-     <div class="materials-section">
-      <h2 class="section-title">الملازم الدراسية</h2>
-      <div class="materials-grid" id="materialsGrid">
-       <div class="loading">
-        <div class="spinner"></div>
-       </div>
-      </div>
-     </div>
-    </div>
-    <div id="examsPage" class="page">
-     <div class="exams-section">
-      <h2 class="section-title">الامتحانات</h2>
-      <div class="exams-grid" id="examsGrid">
-       <div class="loading">
-        <div class="spinner"></div>
-       </div>
-      </div>
-     </div>
-    </div>
-    <div id="telegramModal" class="modal" style="display: none;">
-     <div class="modal-content">
-      <button class="close-modal" onclick="closeModal()"><i class="fas fa-times"></i></button>
-      <img src="https://cdn.glitch.global/d472cc04-f40d-483a-8a7d-67c6c1ddaaff/Picsart_25-04-18_07-56-03-508.jpg?v=1744952192982" alt="قناة التليجرام">
-      <h3>اشترك في قناة التليجرام</h3>
-      <p>تابع آخر التحديثات والمحتوى الجديد</p>
-      <a href="https://t.me/sads86ff" target="_blank"> <i class="fab fa-telegram-plane"></i> اذهب للقناة </a>
-      <br>
-      <button onclick="closeModal()" class="download-btn" style="margin-top: 1rem;"><i class="fas fa-check"></i> لقد اشتركت</button>
-     </div>
+
+      <section class="teachers">
+        <h3>المدرسون والمواد</h3>
+        <div id="teachers-list">
+          <p>جارٍ تحميل بيانات المدرسين...</p>
+        </div>
+      </section>
     </div>
   </div>
-  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-  <script src="https://cdn.plyr.io/3.7.2/plyr.polyfilled.js"></script>
+
   <script>
-    // *** كود الحماية ضد أدوات المطورين (DevTools) ***
-    function blockDevTools() {
-      let devtoolsOpen = false;
-      const threshold = 160; 
-
-      const check = () => {
-        const sizeCheck = window.outerWidth - window.innerWidth > 100 || window.outerHeight - window.innerHeight > 100;
-
-        const start = performance.now();
-        try {
-          // محاولة إيقاف التنفيذ باستخدام الـ debugger
-          new Function('debugger')(); 
-        } catch (e) {}
-        const end = performance.now();
-
-        // Check if devtools are open by checking window size difference or performance delay
-        if (sizeCheck || (end - start) > threshold) {
-          if (!devtoolsOpen) {
-            devtoolsOpen = true;
-            document.body.innerHTML = '<div style="background: black; color: red; font-size: 2rem; position: fixed; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 99999;"><h1>! خطأ !</h1><p style="font-size: 1.2rem;">تم اكتشاف محاولة الوصول غير المصرح بها (DevTools).</p><p style="font-size: 1.2rem;">يرجى إغلاق أدوات المطورين.</p></div>';
-            
-            // محاولة إيقاف التنفيذ بشكل متكرر
-            const preventExecution = setInterval(() => {
-              try {
-                new Function('debugger')();
-              } catch (e) {
-                // إذا تم إغلاق الأدوات، سيتم إيقاف الإنترڤال
-                if (!window.outerWidth) clearInterval(preventExecution);
-              }
-            }, 100);
-          }
-        } else {
-          devtoolsOpen = false;
-        }
-      };
-      
-      setInterval(check, 1000);
-
-      document.onkeydown = function(e) {
-          if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'i' || e.key === 'J' || e.key === 'j')) || (e.metaKey && e.altKey && e.key === 'i')) {
-              e.preventDefault();
-              check(); 
-              return false;
-          }
-      };
-      window.addEventListener('resize', check);
-    }
-    blockDevTools();
-    
-    // إعداد الثيم الأولي
-    function initializeTheme() {
-      const stored = localStorage.getItem('theme');
-      const theme = stored || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
-      document.documentElement.setAttribute('data-theme', theme);
-      updateThemeIcon(theme);
-    }
-
-    function updateThemeIcon(theme) {
-      const icon = document.querySelector('#themeToggle i');
-      icon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
-    }
-
-    // إدارة حفظ تقدم المستخدم وموضع الفيديو
-    let completedLectures = JSON.parse(localStorage.getItem('completedLectures') || '{}');
-    let videoProgress = JSON.parse(localStorage.getItem('videoProgress') || '{}');
-
-    function saveCompleted() {
-      localStorage.setItem('completedLectures', JSON.stringify(completedLectures));
-    }
-
-    function saveVideoProgress(url, currentTime) {
-      videoProgress[url] = currentTime;
-      localStorage.setItem('videoProgress', JSON.stringify(videoProgress));
-    }
-
-    function getVideoProgress(url) {
-      return videoProgress[url] || 0;
-    }
-
-    function markLectureCompleted(url, completed = true) {
-      completedLectures[url] = completed;
-      saveCompleted();
-      if (currentTeacher) renderClasses(currentTeacher.classes);
-    }
-
-    function toggleLectureCompletion(url, event) {
-      event.stopPropagation();
-      const isCompleted = completedLectures[url];
-      markLectureCompleted(url, !isCompleted);
-    }
-
-    function formatTime(seconds) {
-      const minutes = Math.floor(seconds / 60);
-      const remainingSeconds = Math.floor(seconds % 60);
-      return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
-    }
-
-    // إعداد مشغل الفيديو
-    let hls;
-    const player = new Plyr('#player', {
-      controls: ['play-large', 'rewind', 'play', 'fast-forward', 'progress', 'current-time', 'mute', 'volume', 'captions', 'settings', 'airplay', 'fullscreen'],
-      settings: ['speed', 'quality'],
-      speed: { selected: 1, options: [0.5, 1, 1.25, 1.5, 2] },
-      seekTime: 10
-    });
-
-    // حفظ تقدم الفيديو كل 5 ثوان
-    let progressSaveInterval;
-
-    player.on('play', () => {
-      progressSaveInterval = setInterval(() => {
-        if (currentLectureLink && player.currentTime > 0) {
-          saveVideoProgress(currentLectureLink, player.currentTime);
-        }
-      }, 5000);
-    });
-
-    player.on('pause', () => {
-      if (progressSaveInterval) {
-        clearInterval(progressSaveInterval);
-      }
-      if (currentLectureLink && player.currentTime > 0) {
-        saveVideoProgress(currentLectureLink, player.currentTime);
-      }
-    });
-
     // متغيرات عامة
-    const pages = {
-      home: document.getElementById('homePage'),
-      classes: document.getElementById('classesPage'),
-      video: document.getElementById('videoPage'),
-      materials: document.getElementById('materialsPage'),
-      exams: document.getElementById('examsPage')
-    };
+    let allCodes = {};
+    let appData = {};
+    const CODES_FILE_URL = 'codes.json';
+    const DATA_FILE_URL = 'data.json';
+    const errorElement = document.getElementById('loginError');
 
-    const teachersGrid = document.getElementById('teachersGrid');
-    const materialsGrid = document.getElementById('materialsGrid');
-    const examsGrid = document.getElementById('examsGrid');
-    const searchInput = document.getElementById('searchInput');    const searchButton = document.getElementById('searchButton');
-    const navButtons = document.querySelectorAll('.nav-btn');
-
-    // **بيانات المدرس الوحيد: حيدر الطائي - اللغة الإنجليزية**
-    let teachers = [
-        {
-            "id": 1,
-            "name": "حيدر الطائي",
-            "subject": "مادة اللغة الإنجليزية",
-            "image": "https://cdn.glitch.global/d472cc04-f40d-483a-8a7d-67c6c1ddaaff/english-teacher.jpg?v=1710000000000", // صورة افتراضية
-            "classes": [
-                {
-                    "name": "الوحدة الأولى",
-                    "lectures": [
-                        { "title": "المحاضرة 1: الأزمنة", "url": "https://drive.google.com/file/d/1MBTn9R3-emYWTRnjJ5mqpeDcmCKnaLCQ/view?usp=drivesdk", "description": "شرح مفصل للأزمنة في اللغة الإنجليزية." },
-                        { "title": "المحاضرة 2: المبني للمجهول", "url": "https://example.com/video2.m3u8", "description": "قواعد المبني للمجهول وتمارين تطبيقية." }
-                    ]
-                },
-                {
-                    "name": "الوحدة الثانية",
-                    "lectures": [
-                        { "title": "المحاضرة 3: جمل الوصل", "url": "https://example.com/video3.m3u8", "description": "شرح جمل الوصل المعرفة وغير المعرفة." },
-                        { "title": "المحاضرة 4: القطعة الخارجية", "url": "https://example.com/video4.m3u8", "description": "تقنيات التعامل مع القطعة الخارجية في الامتحان الوزاري." },
-                        // **********************************************
-                        // مكان إضافة المحاضرات الجديدة (مثال للمحاضرة الخامسة)
-                        
-                        { 
-                            "title": "المحاضرة 5: النفي الضمني والصريح", 
-                            "url": "https://youtu.be/QJQSDjCucu8?si=oIyCNJq6E3LdMryk", 
-                            "description": "شرح شامل ومفصل لجميع أدوات النفي وقواعدها." 
-                        } 
-                        
-                        // **********************************************
-                    ]
-                }
-            ]
-        }
-    ], 
-    currentTeacher = null, currentClassIndex = 0, currentLectureIndex = 0, currentLectureLink = '';
-    let materials = [], exams = [];
-
-    // دالة التنقل بين الصفحات
-    function navigate(page) {
-      window.scrollTo(0, 0);
-      if (page !== 'video') {
-        player.pause();
-        if (progressSaveInterval) {
-          clearInterval(progressSaveInterval);
-        }
-        if (hls) {
-          hls.destroy();
-          hls = null;
-        }
-      }
-      Object.keys(pages).forEach(k => {
-        pages[k].classList.remove('active');
-      });
-      pages[page].classList.add('active');
-    }
-
-    // نسخ رابط المحاضرة
-    function copyLectureLink() {
-      if (!currentLectureLink) return;
-      navigator.clipboard.writeText(currentLectureLink).then(function() {
-        // إظهار رسالة النجاح
-        const button = document.querySelector('.copy-button');
-        const originalText = button.innerHTML;
-        button.innerHTML = '<i class="fas fa-check"></i> تم النسخ!';
-        button.style.background = 'var(--success)';
-        setTimeout(() => {
-          button.innerHTML = originalText;
-          button.style.background = 'var(--gradient-primary)';
-        }, 2000);
-      }).catch(() => {
-        alert('حدث خطأ أثناء النسخ');
-      });
-    }
-
-    // عرض المدرسين
-    function renderTeachers(list = teachers) {
-      if (!list.length) {
-        teachersGrid.innerHTML = `
-          <div class="teacher-card" style="grid-column: 1/-1; text-align: center; background: var(--card-color);">
-            <i class="fas fa-user-slash" style="font-size: 3rem; color: var(--text-secondary); margin-bottom: 1rem;"></i>
-            <h3>لم يتم العثور على مدرسين</h3>
-            <p>قد تكون هناك مشكلة في تحميل البيانات.</p>
-          </div>
-        `;
-        return;
-      }
-
-      teachersGrid.innerHTML = list.map(teacher => `
-        <div class="teacher-card" onclick="showTeacher('${teacher.id}')">
-          <img src="${teacher.image}" alt="${teacher.name}" class="teacher-img" loading="lazy">
-          <h3 class="teacher-name">${teacher.name}</h3>
-          <p class="teacher-subject">${teacher.subject}</p>
-        </div>
-      `).join('');
-    }
+    // /////////////////////////////////////////////////////////
+    // 🛑 [البداية] المنطق الجديد للتحقق الدوري وحفظ الجلسة
+    // /////////////////////////////////////////////////////////
     
-    // عرض صفحة الفصول
-    function showTeacher(teacherId) {
-      const teacher = teachers.find(t => t.id == teacherId);
-      if (!teacher) return;
-      currentTeacher = teacher;
-
-      document.getElementById('teacherImage').src = teacher.image;
-      document.getElementById('teacherImage').alt = teacher.name;
-      document.getElementById('teacherName').textContent = teacher.name;
-      document.getElementById('teacherSubject').textContent = teacher.subject;
-
-      renderClasses(teacher.classes);
-      navigate('classes');
-    }
-
-    // عرض قائمة الفصول والمحاضرات
-    function renderClasses(classes) {
-      const listContainer = document.getElementById('classesList');
-      listContainer.innerHTML = classes.map((cls, classIndex) => `
-        <div class="class-card">
-          <div class="class-header" onclick="toggleLecturesList(${classIndex})">
-            <h3>${cls.name} (${cls.lectures.length} محاضرة)</h3>
-            <span><i class="fas fa-chevron-down"></i></span>
-          </div>
-          <div class="lectures-list" id="lecturesList-${classIndex}">
-            ${cls.lectures.map((lecture, lectureIndex) => {
-              const lectureUrl = lecture.url;
-              const isCompleted = completedLectures[lectureUrl];
-              const progress = getVideoProgress(lectureUrl);
-              const progressText = progress > 0 ? `(تقدم: ${formatTime(progress)})` : '';
-              
-              return `
-                <div class="lecture-item" onclick="playLecture('${lectureUrl}', ${classIndex}, ${lectureIndex})">
-                  <div class="lecture-content">
-                    <div class="lecture-checkbox ${isCompleted ? 'completed' : ''}" onclick="toggleLectureCompletion('${lectureUrl}', event)">
-                      ${isCompleted ? '<i class="fas fa-check"></i>' : ''}
-                    </div>
-                    <div class="lecture-title">
-                      <h4>${lecture.title}</h4>
-                      <p class="lecture-progress">${progressText}</p>
-                    </div>
-                  </div>
-                  <i class="fas fa-video" style="color: var(--primary);"></i>
-                </div>
-              `;
-            }).join('')}
-          </div>
-        </div>
-      `).join('');
-    }
-
-    // فتح قائمة المحاضرات
-    function toggleLecturesList(index) {
-      const list = document.getElementById(`lecturesList-${index}`);
-      const icon = list.previousElementSibling.querySelector('span i');
-      const isExpanded = list.style.display === 'grid';
-      list.style.display = isExpanded ? 'none' : 'grid';
-      icon.style.transform = isExpanded ? 'rotate(0deg)' : 'rotate(180deg)';
-    }
-
-    // تشغيل المحاضرة
-    function playLecture(url, classIndex, lectureIndex) {
-      currentLectureLink = url;
-      currentClassIndex = classIndex;
-      currentLectureIndex = lectureIndex;
-      
-      const lecture = currentTeacher.classes[classIndex].lectures[lectureIndex];
-
-      document.getElementById('videoTitle').textContent = lecture.title;
-      document.getElementById('videoDescription').textContent = lecture.description;
-      
-      const videoElement = document.getElementById('player');
-      
-      // إيقاف تشغيل HLS الحالي إذا وجد
-      if (hls) {
-        hls.destroy();
-        hls = null;
-      }
-      
-      // ** التعديل الجديد لدعم رابط يوتيوب **
-      if (url.includes('youtube.com') || url.includes('youtu.be')) {
-          const videoIdMatch = url.match(/(?:youtu\.be\/|v=|embed\/|watch\?v=|\/v\/)([^&?#]+)/);
-          const videoId = videoIdMatch ? videoIdMatch[1] : null;
-
-          if (videoId) {
-            player.source = {
-                type: 'video',
-                sources: [{
-                    src: videoId,
-                    provider: 'youtube',
-                }]
-            };
-            player.currentTime = getVideoProgress(url); // استئناف التقدم
-            player.play();
-            navigate('video');
-            return; // إنهاء الدالة بعد معالجة يوتيوب
-          }
-      }
-      // ** نهاية التعديل الجديد **
-
-      // التحقق من صيغة الرابط
-      if (url.endsWith('.m3u8')) {
-        // تشغيل HLS (البث المباشر)
-        if (Hls.isSupported()) {
-          hls = new Hls();
-          hls.loadSource(url);
-          hls.attachMedia(videoElement);
-          hls.on(Hls.Events.MANIFEST_PARSED, function() {
-            player.currentTime = getVideoProgress(url); // استئناف التقدم
-            player.play();
-          });
-          hls.on(Hls.Events.ERROR, function(event, data) {
-            console.error('HLS Error:', data);
-            // محاولة تشغيل الفيديو بشكل مباشر كـ MP4 في حالة فشل HLS
-            videoElement.src = url;
-            player.currentTime = getVideoProgress(url);
-            player.play();
-          });
-        } else if (videoElement.canPlayType('application/vnd.apple.mpegurl')) {
-          // دعم HLS الأصلي (Safari و iOS)
-          videoElement.src = url;
-          videoElement.addEventListener('loadedmetadata', function() {
-            player.currentTime = getVideoProgress(url);
-            player.play();
-          });
-        }
-      } else {
-        // تشغيل كـ MP4 أو رابط مباشر آخر
-        videoElement.src = url;
-        player.currentTime = getVideoProgress(url);
-        player.play();
-      }
-
-      navigate('video');
-    }
-
-    // تحميل المحتوى للملازم والامتحانات
-    function loadContent(type) {
-      navButtons.forEach(btn => btn.classList.remove('active'));
-      document.querySelector(`.nav-btn[onclick="loadContent('${type}')"`).classList.add('active');
-      
-      if (type === 'materials') {
-        renderMaterials();
-        navigate('materials');
-      } else if (type === 'exams') {
-        renderExams();
-        navigate('exams');
-      } else {
-        // إذا كان lectures، نعود لصفحة المدرسين
-        navigate('home');
-      }
-    }
-
-    // عرض الملازم
-    function renderMaterials(list = materials) {
-      materialsGrid.innerHTML = list.map(item => `
-        <div class="material-card">
-          <img src="${item.image}" alt="${item.title}" class="material-img" loading="lazy">
-          <h3 class="material-title">${item.title}</h3>
-          <p class="material-subject">${item.subject}</p>
-          <a href="${item.url}" target="_blank" class="download-btn"><i class="fas fa-download"></i> تحميل الملزمة</a>
-        </div>
-      `).join('');
-    }
-
-    // عرض الامتحانات
-    function renderExams(list = exams) {
-      examsGrid.innerHTML = list.map(item => `
-        <div class="exam-card">
-          <img src="${item.image}" alt="${item.title}" class="exam-img" loading="lazy">
-          <h3 class="exam-title">${item.title}</h3>
-          <p class="exam-subject">${item.subject}</p>
-          <a href="${item.url}" target="_blank" class="download-btn"><i class="fas fa-external-link-alt"></i> ابدأ الامتحان</a>
-        </div>
-      `).join('');
-    }
-
-    // البحث (يعمل فقط على المدرسين حالياً)
-    searchButton.addEventListener('click', () => {
-      const query = searchInput.value.trim().toLowerCase();
-      const filteredTeachers = teachers.filter(t => 
-        t.name.toLowerCase().includes(query) || 
-        t.subject.toLowerCase().includes(query)
-      );
-      renderTeachers(filteredTeachers);
-      navigate('home');
-      loadContent('lectures');
-    });
-
-    searchInput.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') {
-        searchButton.click();
-      }
-    });
-
-    // تحميل البيانات
-    function loadData() {
-        // تم تغيير المسار ليتناسب مع الاسم الجديد للملف data.json
-        fetch('data.json?t=' + Date.now())
-        .then(response => {
-          if (!response.ok) throw new Error('فشل تحميل البيانات');
-          return response.json();
-        })
-        .then(data => {
-          teachers = data.teachers || teachers;
-          materials = data.materials || materials;
-          exams = data.exams || exams;
-          renderTeachers();
-          renderMaterials();
-          renderExams();
-          console.log('تم تحميل البيانات بنجاح:', data);
-        })
-        .catch(error => {
-          console.error('خطأ في تحميل البيانات:', error);
-          teachersGrid.innerHTML = `
-            <div class="teacher-card" style="grid-column: 1/-1; text-align: center; background: var(--card-color);">
-              <i class="fas fa-exclamation-triangle" style="font-size: 3rem; color: var(--error); margin-bottom: 1rem;"></i>
-              <h3>حدث خطأ في تحميل البيانات</h3>
-              <p>يرجى التأكد من وجود ملف data.json في نفس المجلد.</p>
-              <button onclick="location.reload()" class="download-btn" style="margin-top: 1rem;">
-                <i class="fas fa-redo"></i>
-                إعادة تحميل الصفحة
-              </button>
-            </div>
-          `;
-        });
-    }
-
-    // إغلاق النافذة المنبثقة
-    function closeModal() {
-      document.getElementById('telegramModal').style.display = 'none';
-    }
-
-    // ** منطق حماية الدخول الجديد (مرتبط بـ codes.json) **
-
-    let accessCodeDatabase = {}; // سيتم تخزين الأكواد هنا
-    const DEMO_CODE = 'DEMO'; // كود تجريبي محلي للدخول
-
-    // دالة لـ "تسجيل الدخول الناجح" لتجنب تكرار الكود
-    function loginSuccess() {
-        document.getElementById('loginModal').style.display = 'none';
-        document.getElementById('appContent').style.display = 'block';
-        document.body.style.overflow = 'auto'; // السماح بالتمرير
-        document.getElementById('accessError').style.display = 'none';
-        
-        loadData(); // تحميل بيانات المحاضرات
-        navigate('home'); // عرض الصفحة الرئيسية
-    }
+    // 5 دقائق = 300,000 ملي ثانية
+    const fiveMinutesInMs = 300000; 
     
-    // دالة للتحقق من وجود كود محفوظ وتسجيل الدخول تلقائياً
-    function checkAutoLogin() {
-        const savedCode = localStorage.getItem('userAccessCode');
+    // دالة التحقق من إلغاء الصلاحية (كل 5 دقائق)
+    function checkRevocationStatus() {
+        // نستخدم الكود المخزن في المتصفح للتحقق
+        const userCode = localStorage.getItem('userAccessCode'); 
         
-        // إذا كنت تشغل الملف محلياً، استخدم كود DEMO كقيمة افتراضية
-        const isLocalFile = window.location.protocol === 'file:';
-        
-        if (isLocalFile) {
-            // للسماح بالتجربة المحلية دون الحاجة لملف codes.json
-            if (savedCode === DEMO_CODE) {
-                 console.log('دخول تلقائي بوضع التجربة المحلية.');
-                 loginSuccess();
-                 return;
-            }
-            // إذا لم يتم الدخول التلقائي، اظهر شاشة الدخول ليستخدم DEMO
-            document.getElementById('loginModal').style.display = 'flex'; 
+        // إذا لم يكن هناك كود مخزن أو لا يوجد دليل وصول، توقف.
+        if (!userCode || localStorage.getItem('accessGranted') !== 'true') {
             return;
         }
 
-        // منطق التشغيل العادي (على الإنترنت) يبدأ من هنا
-        if (!savedCode) {
-            document.getElementById('loginModal').style.display = 'flex';
-            return;
-        }
-
-        if (accessCodeDatabase.hasOwnProperty(savedCode)) {
-            console.log('دخول تلقائي ناجح.');
-            loginSuccess();
-        } else {
-            localStorage.removeItem('userAccessCode');
-            document.getElementById('loginModal').style.display = 'flex';
-        }
-    }
-
-    // دالة تحميل ملف الأكواد عند فتح الصفحة
-    function loadAccessCodes() {
-        const isLocalFile = window.location.protocol === 'file:';
-
-        if (isLocalFile) {
-            console.warn('وضع التجربة المحلية مفعل. لن يتم تحميل ملف codes.json. استخدم الكود: DEMO');
-            // لا نحتاج لتحميل الملف، ننتقل مباشرة للتحقق من الدخول التلقائي
-            checkAutoLogin(); 
-            return;
-        }
-
-        // منطق التشغيل العادي (تحميل الملف من الإنترنت)
-        fetch('codes.json?t=' + Date.now())
+        // إعادة جلب أحدث نسخة من ملف codes.json
+        fetch(CODES_FILE_URL)
             .then(response => {
-                // قد تفشل هنا إذا كان الملف مفقوداً
+                if (!response.ok) throw new Error('Codes file not found');
+                return response.json();
+            })
+            .then(codesFromServer => {
+                const codeStatus = codesFromServer[userCode];
+
+                // التحقق: إذا كان الكود غير موجود أو حالته "used": true، هذا يعني أنك ألغيته يدوياً في GitHub
+                if (!codeStatus || codeStatus.used === true) {
+                    
+                    // **تنفيذ عملية الطرد (Log Out)**
+                    localStorage.removeItem('accessGranted'); 
+                    localStorage.removeItem('userAccessCode');     
+                    
+                    alert('تم إلغاء صلاحية الوصول لهذا الرمز من قبل الإدارة.');
+                    // إعادة تحميل الصفحة لإظهار شاشة طلب الكود مجدداً
+                    window.location.reload(); 
+                }
+            })
+            .catch(error => {
+                console.error('فشل في جلب ملف الرموز للتحقق الدوري:', error);
+            });
+    }
+
+    // دالة بدء التحقق الدوري
+    function startPeriodicCheck() {
+        // قم بتشغيل الدالة مرة واحدة للتأكد الفوري
+        checkRevocationStatus(); 
+        // ثم ابدأ المؤقت للتحقق كل 5 دقائق
+        setInterval(checkRevocationStatus, fiveMinutesInMs);
+    }
+    
+    // دالة تهيئة التطبيق المعدلة (التي تستبدل جزء من DOMContentLoaded)
+    function checkAccessAndInitialize() {
+        const accessGranted = localStorage.getItem('accessGranted');
+
+        // إذا كان الوصول ممنوحاً ومحفوظاً، اعرض المحتوى وابدأ التحقق الدوري
+        if (accessGranted === 'true') {
+            loginSuccess(); 
+            startPeriodicCheck();
+        } else {
+            // إذا لم يكن هناك وصول محفوظ، قم بتحميل الأكواد وعرض شاشة الدخول
+            fetchCodesAndInitialize();
+        }
+    }
+    // /////////////////////////////////////////////////////////
+    // 🛑 [النهاية] المنطق الجديد
+    // /////////////////////////////////////////////////////////
+
+
+    // دالة تهيئة الثيم (موجودة في نسختك الأصلية)
+    function initializeTheme() {
+      const savedTheme = localStorage.getItem('theme') || 'light-mode';
+      document.body.className = savedTheme;
+      document.getElementById('themeIcon').className = savedTheme === 'dark-mode' ? 'fas fa-sun' : 'fas fa-moon';
+    }
+
+    // دالة تبديل الثيم (موجودة في نسختك الأصلية)
+    function toggleTheme() {
+      if (document.body.className === 'dark-mode') {
+        document.body.className = 'light-mode';
+        localStorage.setItem('theme', 'light-mode');
+        document.getElementById('themeIcon').className = 'fas fa-moon';
+      } else {
+        document.body.className = 'dark-mode';
+        localStorage.setItem('theme', 'dark-mode');
+        document.getElementById('themeIcon').className = 'fas fa-sun';
+      }
+    }
+
+    // دالة لجلب الأكواد وبدء التشغيل (موجودة في نسختك الأصلية)
+    function fetchCodesAndInitialize() {
+        fetch(CODES_FILE_URL)
+            .then(response => {
                 if (!response.ok) {
-                    throw new Error('فشل تحميل ملف codes.json.');
+                    throw new Error('فشل في تحميل ملف الأكواد.');
                 }
                 return response.json();
             })
             .then(data => {
-                accessCodeDatabase = data;
-                console.log('تم تحميل ملف الأكواد بنجاح.');
-                checkAutoLogin();
+                allCodes = data;
+                // بعد تحميل الأكواد، نعرض شاشة الدخول
+                document.getElementById('loginModal').style.display = 'flex';
             })
-            .catch(err => {
-                console.error('خطأ فادح في تحميل الأكواد:', err);
-                const errorElement = document.getElementById('accessError');
-                errorElement.innerText = 'خطأ: لا يمكن تحميل نظام الحماية. تأكد من رفع ملف codes.json بشكل صحيح.';
+            .catch(error => {
+                console.error(error);
+                errorElement.innerText = 'خطأ حرج في النظام. يرجى مراجعة المطور.';
                 errorElement.style.display = 'block';
-                document.getElementById('loginModal').style.display = 'flex'; 
             });
     }
 
-    // دالة فحص الكود المدخل يدوياً
-    function checkAccessCode() {
-        const inputElement = document.getElementById('accessCodeInput');
-        const errorElement = document.getElementById('accessError');
-        const enteredCode = inputElement.value.trim().toUpperCase();
-        
-        const isLocalFile = window.location.protocol === 'file:';
+    // دالة جلب البيانات وعرض المحتوى (موجودة في نسختك الأصلية)
+    function fetchAppData() {
+        fetch(DATA_FILE_URL)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('فشل في تحميل بيانات التطبيق.');
+                }
+                return response.json();
+            })
+            .then(data => {
+                appData = data;
+                renderTeachers(appData.teachers);
+                renderAnnouncements(appData.announcements);
+            })
+            .catch(error => {
+                console.error(error);
+                // يمكنك إضافة رسالة خطأ هنا لعرضها للمستخدم
+            });
+    }
 
-        // 1. معالجة وضع التجربة المحلية
-        if (isLocalFile) {
-            if (enteredCode === DEMO_CODE) {
-                localStorage.setItem('userAccessCode', DEMO_CODE);
-                loginSuccess();
-            } else {
-                errorElement.innerText = 'أنت في وضع التجربة المحلية. استخدم الكود: DEMO';
-                errorElement.style.display = 'block';
-            }
+    // دالة عرض المحتوى بعد نجاح الدخول (موجودة في نسختك الأصلية)
+    function loginSuccess() {
+        document.getElementById('loginModal').style.display = 'none';
+        document.getElementById('appContent').style.display = 'block';
+        fetchAppData();
+    }
+
+    // دالة التحقق من الكود (معدلة لإضافة حفظ الوصول)
+    window.checkAccessCode = function() {
+        const enteredCode = document.getElementById('accessCode').value.trim().toUpperCase();
+        errorElement.style.display = 'none';
+
+        if (!enteredCode) {
+            errorElement.innerText = 'الرجاء إدخال كود الدخول.';
+            errorElement.style.display = 'block';
             return;
         }
-        
-        // 2. معالجة وضع الإنترنت (يجب أن تكون accessCodeDatabase مملوءة)
-        if (Object.keys(accessCodeDatabase).length === 0) {
-             errorElement.innerText = 'جاري تحميل الأكواد، يرجى الانتظار...';
-             errorElement.style.display = 'block';
-             return;
-        }
 
-        // 3. التحقق من الكود الفعلي (على الإنترنت)
-        if (accessCodeDatabase.hasOwnProperty(enteredCode)) {
-            const codeDetails = accessCodeDatabase[enteredCode];
+        const codeDetails = allCodes[enteredCode];
 
+        if (codeDetails) {
             if (codeDetails.used) {
                 errorElement.innerText = 'هذا الكود مستخدم بالفعل. تواصل مع المدرس.';
                 errorElement.style.display = 'block';
             } else {
+                // /////////////////////////////////////////////////////////
+                // 🟢 تعديل هنا: حفظ دليل الوصول والبدء بالتحقق الدوري
+                // /////////////////////////////////////////////////////////
                 localStorage.setItem('userAccessCode', enteredCode); 
-                loginSuccess();
+                localStorage.setItem('accessGranted', 'true'); // NEW LINE
                 
+                loginSuccess();
+                startPeriodicCheck(); // NEW LINE
+
+                // رسالة للمطور عن الإجراء اليدوي اللازم
                 console.warn(`تم تفعيل الكود: ${enteredCode}. يرجى تحديث ملف codes.json وجعل "used": true لهذا الكود.`);
                 alert(`تم تفعيل الكود بنجاح. تواصل مع المدرس لتأكيد التفعيل النهائي للكود.`);
             }
@@ -1552,7 +475,7 @@
     }
     // نهاية منطق حماية الدخول
 
-    // منع النقر بالزر الأيمن والتحديد
+    // منع النقر بالزر الأيمن والتحديد (موجودة في نسختك الأصلية)
     document.addEventListener('contextmenu', e => e.preventDefault());
     document.addEventListener('selectstart', e => e.preventDefault());
 
@@ -1564,11 +487,85 @@
       document.getElementById('appContent').style.display = 'none';
       document.body.style.overflow = 'auto'; // السماح بالتمرير
       
-      // تحميل ملف الأكواد، وهو الذي سيقرر إظهار نافذة الدخول أو المحتوى
-      loadAccessCodes();
+      // 🛑 تعديل هنا: التحقق من وجود وصول محفوظ قبل تحميل الأكواد وعرض شاشة الدخول
+      checkAccessAndInitialize(); 
     });
-    // نهاية التهيئة
-    
+
+    // ... (بقية دوال عرض المحتوى الخاصة بك) ...
+    function renderTeachers(teachers) {
+      const teachersList = document.getElementById('teachers-list');
+      teachersList.innerHTML = ''; 
+
+      teachers.forEach(teacher => {
+        const card = document.createElement('div');
+        card.className = 'teacher-card';
+        card.innerHTML = `
+          <img src="${teacher.image}" alt="${teacher.name}" class="teacher-image">
+          <h4>${teacher.name}</h4>
+          <p>${teacher.subject}</p>
+          <div class="lectures-container">
+            ${teacher.classes.map(unit => `
+              <div class="unit">
+                <div class="unit-header" onclick="toggleUnit(this)">
+                  <span>${unit.name}</span>
+                  <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="unit-content">
+                  ${unit.lectures.map(lecture => `
+                    <div class="lecture">
+                      <div class="lecture-title">${lecture.title}</div>
+                      <p>${lecture.description}</p>
+                      <div class="player-container">
+                        <div id="player-${lecture.url.split('?')[0].split('/').pop()}" data-plyr-provider="youtube" data-plyr-embed-id="${lecture.url.split('=')[1].split('&')[0]}"></div>
+                      </div>
+                    </div>
+                  `).join('')}
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        `;
+        teachersList.appendChild(card);
+      });
+      // تهيئة مشغلات Plyr بعد إضافة المحاضرات
+      if (typeof Plyr !== 'undefined') {
+        const players = Array.from(document.querySelectorAll('.player-container > div')).map(p => new Plyr(p.id));
+      }
+    }
+
+    function toggleUnit(header) {
+      const content = header.nextElementSibling;
+      const icon = header.querySelector('i');
+      const isActive = content.classList.contains('active');
+
+      // إغلاق كل الوحدات الأخرى
+      document.querySelectorAll('.unit-content.active').forEach(c => {
+        c.classList.remove('active');
+        c.previousElementSibling.querySelector('i').className = 'fas fa-chevron-down';
+      });
+
+      // فتح الوحدة الحالية إذا لم تكن مفتوحة
+      if (!isActive) {
+        content.classList.add('active');
+        icon.className = 'fas fa-chevron-up';
+      }
+    }
+
+    function renderAnnouncements(announcements) {
+      const announcementsList = document.getElementById('announcements-list');
+      announcementsList.innerHTML = '';
+      
+      announcements.forEach(announcement => {
+        const card = document.createElement('div');
+        card.className = 'announcement-card';
+        card.innerHTML = `
+          <h4>${announcement.title}</h4>
+          <p>${announcement.message}</p>
+          <small style="color: var(--text-light);">${announcement.date}</small>
+        `;
+        announcementsList.appendChild(card);
+      });
+    }
   </script>
  </body>
 </html>
